@@ -4,12 +4,12 @@ parameters:
   # By default we enable the main workflow
   trigger:
     type: boolean
-    default: true
+    default: false
 
   # Add a boolean parameter on each package.
   core:
     type: boolean
-    default: false
+    default: true
   components:
     type: boolean
     default: false
