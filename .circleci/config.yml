@@ -9,10 +9,10 @@ parameters:
   # Add a boolean parameter on each package.
   core:
     type: boolean
-    default: true
+    default: false
   components:
     type: boolean
-    default: false
+    default: true
 
 executors:
   node:
