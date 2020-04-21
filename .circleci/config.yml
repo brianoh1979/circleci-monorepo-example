@@ -35,8 +35,8 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - '7d:4f:a9:ac:9d:54:47:bc:4d:aa:bd:b0:98:20:df:91'
-      - run: git config user.email "ci@julienkarst.com" && git config user.name "[CI] 🤖"
+            - 'e4:2e:3b:f4:6a:06:31:5a:37:d7:db:c6:2c:12:3e:ed'
+      - run: git config user.email "brian_o_halloran@hotmail.com" && git config user.name "brianoh1979"
       - run: yarn bump:version
 
   lint:
