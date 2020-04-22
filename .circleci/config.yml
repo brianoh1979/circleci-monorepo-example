@@ -74,7 +74,7 @@ workflows:
 
   # The main workflow will trigger other workflow based on your changes
   trigger:
- #   when: << pipeline.parameters.trigger >>
+    when: << pipeline.parameters.trigger >>
     jobs:
       - trigger-workflows
       - new_version:
@@ -87,13 +87,13 @@ workflows:
 
   # Workflows defined for each package.
   core:
- #   when: << pipeline.parameters.core >>
+    when: << pipeline.parameters.core >>
     jobs:
       - lint:
           package_name: core
 
   components:
- #   when: << pipeline.parameters.components >>
+    when: << pipeline.parameters.components >>
     jobs:
       - test:
           package_name: components
