@@ -30,7 +30,7 @@ jobs:
       - checkout
       - multirepo/run-job-for-paths:
           upstream-branch: origin/master
-          paths: -
+          paths: ~/packages/components/lib
           working_directory: $PWD
           run_on_upstream: true
       - run: yarn --frozen-lockfile
@@ -44,7 +44,7 @@ jobs:
       - checkout
       - multirepo/run-job-for-paths:
           upstream-branch: origin/master
-          paths: -
+          paths: ~/packages/components/lib
           working_directory: $PWD
           run_on_upstream: true
       - add_ssh_keys:
