@@ -30,6 +30,9 @@ jobs:
       - checkout
       - multirepo/run-job-for-paths:
           upstream-branch: origin/master
+          paths: -
+          working_directory: $PWD
+          run_on_upstream: true
       - run: yarn --frozen-lockfile
       - run:
           name: Trigger workflows
@@ -41,6 +44,9 @@ jobs:
       - checkout
       - multirepo/run-job-for-paths:
           upstream-branch: origin/master
+          paths: -
+          working_directory: $PWD
+          run_on_upstream: true
       - add_ssh_keys:
           fingerprints:
             - 'e4:2e:3b:f4:6a:06:31:5a:37:d7:db:c6:2c:12:3e:ed'
