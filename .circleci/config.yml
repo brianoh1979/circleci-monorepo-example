@@ -4,19 +4,19 @@ version: 2.1
 orbs:
   swissknife: roopakv/swissknife@0.29.0
 
-#parameters:
+parameters:
   # By default we enable the main workflow
-#  trigger:
-#    type: boolean
-#    default: true
+  trigger:
+    type: boolean
+    default: true
 
   # Add a boolean parameter on each package.
-#  core:
-#    type: boolean
-#    default: false
-#  components:
-#    type: boolean
-#    default: false
+  core:
+    type: boolean
+    default: false
+  components:
+    type: boolean
+    default: false
 
 executors:
   node:
