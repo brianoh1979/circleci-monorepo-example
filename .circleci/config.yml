@@ -67,33 +67,33 @@ jobs:
           name: Running linter on << parameters.package_name >>
           command: echo << parameters.package_name >> lint
 
-#workflows:
-#  version: 2
+workflows:
+  version: 2
 
   # The main workflow will trigger other workflow based on your changes
-#  trigger:
+  trigger:
 #    when: << pipeline.parameters.trigger >>
-#    jobs:
-#      - trigger-workflows
-#      - new_version:
-#          requires:
-#            - trigger-workflows
-#          filters:
-#            branches:
-#              only:
-#                - master
+    jobs:
+      - trigger-workflows
+      - new_version:
+          requires:
+            - trigger-workflows
+          filters:
+            branches:
+              only:
+                - master
 
   # Workflows defined for each package.
-#  core:
+  core:
 #    when: << pipeline.parameters.core >>
-#    jobs:
-#      - lint:
-#          package_name: core
+    jobs:
+      - lint:
+          package_name: core
 
-#  components:
+  components:
 #    when: << pipeline.parameters.components >>
-#    jobs:
-#      - test:
-#          package_name: components
-#      - lint:
-#          package_name: components
+    jobs:
+      - test:
+          package_name: components
+      - lint:
+          package_name: components
