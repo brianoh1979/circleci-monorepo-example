@@ -33,7 +33,6 @@ jobs:
           custom-parameters: '{"run_trigger": false, "run_components": true}'
           pattern: ^(directory|\packages\components\lib).*
           use-divergence-point: true
-          workflow-name: '*'
 #          job-name: 
 #      - run: yarn --frozen-lockfile
 #      - run:
