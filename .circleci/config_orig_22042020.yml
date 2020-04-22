@@ -1,44 +1,34 @@
 #Comment to trigger fresh commit
 version: 2.1
 
-orbs:
-  swissknife: roopakv/swissknife@0.29.0
-
-#parameters:
+parameters:
   # By default we enable the main workflow
-#  trigger:
-#    type: boolean
-#    default: true
+  trigger:
+    type: boolean
+    default: true
 
   # Add a boolean parameter on each package.
-#  core:
-#    type: boolean
-#    default: false
-#  components:
-#    type: boolean
-#    default: false
+  core:
+    type: boolean
+    default: false
+  components:
+    type: boolean
+    default: false
 
 executors:
   node:
     docker:
-      - image: 'circleci/node:latest'
+      - image: circleci/node
 
 jobs:
   trigger-workflows:
     executor: node
     steps:
       - checkout
-      - swissknife/trigger_pipeline_if_modified:
-          always-trigger-on-branch: master
-          custom-parameters: '{"run_trigger": false, "run_components": true}'
-          pattern: ^(directory|\packages\components\lib).*
-          use-divergence-point: true
-          workflow-name: *
-#          job-name: 
-#      - run: yarn --frozen-lockfile
-#      - run:
-#          name: Trigger workflows
-#          command: node ./circleci.js
+      - run: yarn --frozen-lockfile
+      - run:
+          name: Trigger workflows
+          command: node ./circleci.js
 
   new_version:
     executor: node
@@ -75,7 +65,7 @@ workflows:
 
   # The main workflow will trigger other workflow based on your changes
   trigger:
- #   when: << pipeline.parameters.trigger >>
+    when: << pipeline.parameters.trigger >>
     jobs:
       - trigger-workflows
       - new_version:
@@ -88,13 +78,13 @@ workflows:
 
   # Workflows defined for each package.
   core:
- #   when: << pipeline.parameters.core >>
+    when: << pipeline.parameters.core >>
     jobs:
       - lint:
           package_name: core
 
   components:
- #   when: << pipeline.parameters.components >>
+    when: << pipeline.parameters.components >>
     jobs:
       - test:
           package_name: components
