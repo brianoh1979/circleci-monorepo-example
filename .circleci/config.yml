@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  dnephin/multirepo@0.0.7
+  multirepo: dnephin/multirepo@0.0.7
 
 parameters:
   # By default we enable the main workflow
