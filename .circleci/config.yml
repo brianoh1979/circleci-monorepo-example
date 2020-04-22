@@ -30,9 +30,9 @@ jobs:
       - checkout
       - swissknife/trigger_pipeline_if_modified:
           always-trigger-on-branch: master
-          custom-parameters: '{"run_trigger": false, "run_components": true}'
           pattern: ^(directory|\packages\components\lib).*
           use-divergence-point: true
+          workflow-name: components
 #          job-name: 
 #      - run: yarn --frozen-lockfile
 #      - run:
