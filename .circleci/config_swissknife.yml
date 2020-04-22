@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  dnephin/multirepo@0.0.7
+  swissknife: roopakv/swissknife@0.29.0
 
 parameters:
   # By default we enable the main workflow
@@ -28,19 +28,21 @@ jobs:
     executor: node
     steps:
       - checkout
-      - multirepo/run-job-for-paths:
-          upstream-branch: origin/master
-      - run: yarn --frozen-lockfile
-      - run:
-          name: Trigger workflows
-          command: node ./circleci.js
+      - swissknife/trigger_pipeline_if_modified:
+          always-trigger-on-branch: master
+          custom-parameters: '{"trigger": false, "core": true, "components": false}'
+          pattern: ^(directory|\packages\components\lib).*
+          use-divergence-point: true
+#          job-name: 
+#      - run: yarn --frozen-lockfile
+#      - run:
+#          name: Trigger workflows
+#          command: node ./circleci.js
 
   new_version:
     executor: node
     steps:
       - checkout
-      - multirepo/run-job-for-paths:
-          upstream-branch: origin/master
       - add_ssh_keys:
           fingerprints:
             - 'e4:2e:3b:f4:6a:06:31:5a:37:d7:db:c6:2c:12:3e:ed'
