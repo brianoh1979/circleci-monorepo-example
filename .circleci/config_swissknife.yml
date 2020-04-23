@@ -16,7 +16,7 @@ parameters:
     default: false
   components:
     type: boolean
-    default: true
+    default: false
 
 executors:
   node:
@@ -29,10 +29,8 @@ jobs:
     steps:
       - checkout
       - swissknife/trigger_pipeline_if_modified:
-          always-trigger-on-branch: master
-          custom-parameters: '{"trigger": false, "core": true, "components": false}'
-          pattern: ^(directory|\packages\components\lib).*
-          use-divergence-point: true
+          additional-param-map: '{"trigger": false, "core": true, "components": false}'
+          code-param-name-map: '{"regex": ~/environment/circleci-monorepo-example/packages/components/lib}'
 #          job-name: 
 #      - run: yarn --frozen-lockfile
 #      - run:

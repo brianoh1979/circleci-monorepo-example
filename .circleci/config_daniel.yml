@@ -2,21 +2,21 @@
 version: 2.1
 
 orbs:
-  swissknife: roopakv/swissknife@0.29.0
+  multirepo: dnephin/multirepo@0.0.7
 
-parameters:
+#parameters:
   # By default we enable the main workflow
-  trigger:
-    type: boolean
-    default: false
+#  trigger:
+#    type: boolean
+#    default: false
 
   # Add a boolean parameter on each package.
-  core:
-    type: boolean
-    default: false
-  components:
-    type: boolean
-    default: false
+#  core:
+#    type: boolean
+#    default: false
+#  components:
+#    type: boolean
+#    default: true
 
 executors:
   node:
@@ -28,19 +28,19 @@ jobs:
     executor: node
     steps:
       - checkout
-      - swissknife/trigger_pipeline_if_modified:
-          additional-param-map: '{"trigger": false, "core": true, "components": false}'
-          code-param-name-map: '{"regex": ~/environment/circleci-monorepo-example/packages/components/lib}'
-#          job-name: 
-#      - run: yarn --frozen-lockfile
-#      - run:
-#          name: Trigger workflows
-#          command: node ./circleci.js
+      - multirepo/run-job-for-paths:
+          paths: ~/packages/components/lib
+      - run: yarn --frozen-lockfile
+      - run:
+          name: Trigger workflows
+          command: node ./circleci.js
 
   new_version:
     executor: node
     steps:
       - checkout
+      - multirepo/run-job-for-paths:
+          paths: ~/packages/components/lib
       - add_ssh_keys:
           fingerprints:
             - 'e4:2e:3b:f4:6a:06:31:5a:37:d7:db:c6:2c:12:3e:ed'
@@ -72,7 +72,7 @@ workflows:
 
   # The main workflow will trigger other workflow based on your changes
   trigger:
-    when: << pipeline.parameters.trigger >>
+#    when: << pipeline.parameters.trigger >>
     jobs:
       - trigger-workflows
       - new_version:
@@ -85,13 +85,13 @@ workflows:
 
   # Workflows defined for each package.
   core:
-    when: << pipeline.parameters.core >>
+#    when: << pipeline.parameters.core >>
     jobs:
       - lint:
           package_name: core
 
   components:
-    when: << pipeline.parameters.components >>
+#    when: << pipeline.parameters.components >>
     jobs:
       - test:
           package_name: components
