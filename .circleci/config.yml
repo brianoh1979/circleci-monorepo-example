@@ -28,7 +28,7 @@ jobs:
     executor: node
     steps:
       - checkout
-      - swissknife/trigger_pipeline_if_modified:
+      - swissknife/trigger-workflows-for-all-modified:
           additional-param-map: '{"trigger": false, "core": true, "components": false}'
           code-param-name-map: '{"regex": ~/environment/circleci-monorepo-example/packages/components/lib}'
 #          job-name: 
